@@ -10,6 +10,7 @@ flask-script = "*"
 flask-migrate = "*"
 pymysql = "*"
 bcrypt = "*"
+sqlalchemy = "*"
 
 [dev-packages]
 

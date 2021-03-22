@@ -37,7 +37,28 @@ class ProfessorDisciplina(db.Model):
 
     id = db.Column(db.Integer, primary_key=True)
     professor_id = db.Column(db.Integer, db.ForeignKey('professores.id'), nullable=False)
-    disciplina_id = db.Column(db. Integer, db.ForeignKey('disciplinas.id'), nullable=False)
+    disciplina_id = db.Column(db.Integer, db.ForeignKey('disciplinas.id'), nullable=False)
 
     def __repr__(self):
-        return '<Disciplinas do professor %s>' % self.professor_id
+        return '<Disciplinas do professor %d>' % self.professor_id
+
+class Etapa(db.Model):
+    __tablename__ = 'etapas'
+
+    id = db.Column(db.Integer, primary_key=True)
+    disciplina_id = db.Column(db.Integer, db.ForeignKey('disciplinas.id'), nullable=False)
+    descricao = db.Column(db.String(200), index=True, nullable=False)
+
+    def __repr__(self):
+        return '<Etapa %s>' % self.descricao
+
+class Nota(db.Model):
+    __tablename__ = 'notas'
+
+    id = db.Column(db.Integer, primary_key=True)
+    aluno_id = db.Column(db.Integer, db.ForeignKey('alunos.id'), nullable=False)
+    etapa_id = db.Column(db.Integer, db.ForeignKey('etapas.id'), nullable=False)
+    nota = db.Column(db.Float, nullable=False)
+
+    def __repr__(self):
+        return '<Nota %f da etapa %d>' % self.nota, self.etapa_id
