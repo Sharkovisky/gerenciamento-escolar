@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+
+{% block conteudo%}
+    <h2 class="bg warning">Listagem de professores</h2>
+    {% if msg == 'deletar' %}
+    <div class="alert alert-success">Professor deletado com sucesso!</div>
+    {% endif%}
+
+    {% if lista|count > 0 %}
+    <table class="table">
+        <tr>
+            <th>ID</th>
+            <th>Nome</th>
+            <th>Email</th>
+            <th></th>
+        </tr>
+        {% for l in lista %}
+        <tr>
+            <td>{{ l.id }}</td>
+            <td>{{ l.nome }}</td>
+            <td>{{ l.email }}</td>
+            <td><a href="/professores/deletar/{{ l.id }}" class="btn btn-warning">Alterar</a></td>
+            <td><a href="/professores/deletar/{{ l.id }}" class="btn btn-warning">Deletar</a></td>
+        </tr>
+        {% endfor %}
+    </table>
+    {% endif %}
+    <div class="alert alert-success">Não há nenhum professor cadastrado!</div>
+{% endblock%}

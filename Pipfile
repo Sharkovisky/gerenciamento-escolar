@@ -11,6 +11,7 @@ flask-migrate = "*"
 pymysql = "*"
 bcrypt = "*"
 sqlalchemy = "*"
+python-dotenv = "*"
 
 [dev-packages]
 

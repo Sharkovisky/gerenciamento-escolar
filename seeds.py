@@ -11,7 +11,7 @@ db.session.add(p1)
 db.session.commit()
 
 #Criando disciplinas
-d1 = Disciplina(nome='Banco de Dados', calculo='60 de prova e 40 de trabalhos')
+d1 = Disciplina(nome='Banco de Dados', calculo='Soma')
 db.session.add(d1)
 db.session.commit()
 

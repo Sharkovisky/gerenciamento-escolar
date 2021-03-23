@@ -5,8 +5,8 @@ class Professor(db.Model):
 
     id = db.Column(db.Integer, primary_key=True)
     nome = db.Column(db.String(200), nullable=False)
-    email = db.Column(db.String(200), index=True, unique=True)
-    senha = db.Column(db.String(200))
+    email = db.Column(db.String(200), index=True, unique=True, nullable=False)
+    senha = db.Column(db.String(200), nullable=False)
 
     def __repr__(self):
         return '<Professor %s>' % self.nome
@@ -16,7 +16,7 @@ class Disciplina(db.Model):
 
     id = db.Column(db.Integer, primary_key=True)
     nome = db.Column(db.String(200), nullable=False)
-    calculo = db.Column(db.String(200))
+    calculo = db.Column(db.String(20), nullable=False, default="Soma")
 
     def __repr__(self):
         return '<Disciplina %s>' % self.nome
@@ -26,8 +26,8 @@ class Aluno(db.Model):
 
     id = db.Column(db.Integer, primary_key=True)
     nome = db.Column(db.String(200), nullable=False)
-    email = db.Column(db.String(200), index=True, unique=True)
-    senha = db.Column(db.String(200))
+    email = db.Column(db.String(200), index=True, unique=True, nullable=False)
+    senha = db.Column(db.String(200), nullable=False)
 
     def __repr__(self):
         return '<Aluno %s>' % self.nome
