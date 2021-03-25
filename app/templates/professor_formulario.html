@@ -1,0 +1,32 @@
+{% extends "base.html"%}
+{% block conteudo %}
+
+{% if tipo=='alterar'%}
+<h2>Alteração de professor</h2>
+{% else %}
+<h2>Inclusão de professor</h2>
+{% endif %}
+
+{% if tipo=='alterar'%}
+<form action="/professores/alterar/{{ professor.id }}" method="POST">
+{% else %}
+<form action="/professores/inserir" method="POST">
+{% endif %}
+    
+        <div class="form-group">
+            <label for="nome">Nome:</label>
+            <input type="text" id="nome" name="nome" class="form-control" value="{{ professor.nome if professor}}">
+        </div>
+        <div class="form-group">
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" class="form-control" value="{{ professor.email if professor}}">
+        </div>
+        {% if tipo == 'inserir' %}
+        <div class="form-group">
+            <label for="senha">Senha:</label>
+            <input type="password" id="senha" name="senha" class="form-control" value="{{ professor.senha if professor}}">
+        </div>
+        {% endif %}
+        <input type="submit" class="btn btn-primary mt-2" value="{{'Cadastrar' if tipo == 'inserir' else 'Alterar'}}">
+    </form>
+{% endblock %}

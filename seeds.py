@@ -6,7 +6,7 @@ import bcrypt
 #Criando professores
 senha_plana = 'Suporte99' 
 senha_encriptada = bcrypt.hashpw(senha_plana.encode('utf-8'), bcrypt.gensalt())
-p1 = Professor(nome='Marco Antônio', email='marco.andrade@ifro.edu.br', senha=senha_encriptada)
+p1 = Professor(nome='Marco Antônio 2', email='marco.andrade2@ifro.edu.br', senha=senha_encriptada)
 db.session.add(p1)
 db.session.commit()
 
@@ -18,6 +18,6 @@ db.session.commit()
 #Criando aluno
 senha_plana = 'alunorazao' 
 senha_encriptada = bcrypt.hashpw(senha_plana.encode('utf-8'), bcrypt.gensalt())
-a1 = Aluno(nome='Nelson', email='nelson.tremea@gmail.com', senha=senha_encriptada)
+a1 = Aluno(nome='Nelson2', email='nelson.tremea2@gmail.com', senha=senha_encriptada)
 db.session.add(a1)
 db.session.commit()
