@@ -11,6 +11,21 @@
     {% endif%}
 
     {% if lista|count > 0 %}
+
+    <form class="row g-3">
+      <div class="col-auto">
+        <label for="staticEmail2" class="visually-hidden">Nome</label>
+        <input type="text" readonly class="form-control-plaintext" id="staticEmail2" value="Nome">
+      </div>
+      <div class="col-auto">
+        <label for="inputPassword2" class="visually-hidden">Nome</label>
+        <input type="text" class="form-control" id="nome" name="nome" placeholder="Nome">
+      </div>
+      <div class="col-auto">
+        <button type="submit" class="btn btn-primary mb-3">Buscar</button>
+      </div>
+    </form>
+
     <table class="table">
         <tr>
             <th>ID</th>
@@ -25,7 +40,7 @@
             <td>{{ l.email }}</td>
             <td><a href="/professores/alterar/{{ l.id }}" class="btn btn-warning">Alterar</a></td>
             <td>
-                <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#modalProfessor">
+                <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#modalDeletarProfessor" onclick="setProfessor(id)">
                     Deletar
                 </button>
             </td>
@@ -33,24 +48,49 @@
         {% endfor %}
     </table>
     {% endif %}
+
+    <nav aria-label="...">
+      <ul class="pagination pagination-sm">
+        {% for p in range(paginas - 2)%}
+        {% if pp == pagina_atual - 2 %}
+        <li class="page-item active" aria-current="page"></li>
+        {% else %}
+        <li class="page-item">
+        {% endif %}
+          <a class="page-link" href="/professores/pagina/{{ p + 1}}">{{ p }}</a>
+        </li>
+        {% endfor %}
+      </ul>
+    </nav>
     
-    <div class="modal fade" id="modalProfessor" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog" role="document">
-          <div class="modal-content">
-            <div class="modal-header">
-              <h5 class="modal-title" id="exampleModalLabel">Exclusão de professor</h5>
-              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-              </button>
-            </div>
-            <div class="modal-body">
-              Deseja realmente excluir esse professor?
-            </div>
-            <div class="modal-footer">
-              <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
-              <button type="button" class="btn btn-danger">Confirmar exclusão</button>
-            </div>
+    <div class="modal fade" id="modalDeletarProfessor" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Confirmação de exclusão</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            ...
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+            <button type="button" class="btn btn-primary" onclick="deletarProfessor()">Deletar</button>
           </div>
         </div>
       </div>
+    </div>
+
+    <script>
+      let professorId = 0
+
+      function setProfessor(id){
+        professorId = id
+      }
+
+      function deletarProfessor(){
+        let url = "/professores/deletar/" + professorId
+        window.location.href = url
+      }
+    </script>
 {% endblock%}

@@ -4,10 +4,20 @@ from app.models.tables import Professor
 import bcrypt
 
 @app.route('/professores')
-def listar_professores():
+@app.route('/professores/pagina/<int:pagina>/')
+def listar_professores(pagina=1):
     mensagem = request.args.get('msg')
-    lista = Professor.query.all()
-    return render_template("professor_listar.html", lista=lista)
+    nome = request.args.get('nome')
+    if nome:
+        nome = '%' + nome + '%'
+        lista = Professor.query.filter(Professor.nome.like(nome)).all()
+    else:
+        # lista = Professor.query.all()
+        paginacao = Professor.query.paginate(page = pagina, per_page = 2)
+        lista = paginacao.items
+        total_paginas = paginacao.total
+
+    return render_template("professor_listar.html", lista=lista, paginas=total_paginas, pagina_atual=pagina)
 
 
 @app.route('/professores/deletar/<professor_id>')
