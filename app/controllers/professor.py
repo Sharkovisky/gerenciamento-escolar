@@ -1,10 +1,13 @@
-from app import app, db
+from app import app, db, login_manager
 from flask import render_template, redirect, url_for, request
+from flask_login import login_required
 from app.models.tables import Professor
 import bcrypt
 
+
 @app.route('/professores')
 @app.route('/professores/pagina/<int:pagina>/')
+@login_required
 def listar_professores(pagina=1):
     mensagem = request.args.get('msg')
     nome = request.args.get('nome')

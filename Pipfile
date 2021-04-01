@@ -12,6 +12,7 @@ pymysql = "*"
 bcrypt = "*"
 sqlalchemy = "*"
 python-dotenv = "*"
+flask-login = "*"
 
 [dev-packages]
 

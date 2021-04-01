@@ -9,7 +9,15 @@
 </head>
 <body>
     <header class="bg-success">
-        <h1 class="container text-light pt-4 pb-2">Gerenciamento Escolar</h1>
+        <div class="container">
+            <h1 class="container text-light pt-4 pb-2">Gerenciamento Escolar</h1>
+            {% if current_user.is_authenticated %}
+            <div>
+                Olá, {{ current_user.get_nome() }}
+                <a href="/login" class="text-light">Sair</a>
+            </div>
+            {% endif %}
+        </div>
     </header>
     <main class="container">
         {% block conteudo %}
@@ -17,6 +25,7 @@
     </main>
 
     <script src="{{ url_for('static', filename='js/jquery-3.6.0.min.js') }}"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.1/dist/umd/popper.min.js" integrity="sha384-SR1sx49pcuLnqZUnnPwx6FCym0wLsk5JZuNx2bPPENzswTNFaQU1RDvt3wT4gWFG" crossorigin="anonymous"></script>
     <script src="{{ url_for('static', filename='js/bootstrap.min.js') }}"></script>
 </body>
 </html>

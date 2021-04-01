@@ -4,13 +4,13 @@
     <h2 class="bg warning">Listagem de professores</h2>
     {% if msg == 'deletar' %}
     <div class="alert alert-success">Professor deletado com sucesso!</div>
-    {% endif%}
+    {% endif %}
 
     {% if msg == 'alterar' %}
     <div class="alert alert-success">Professor alterado com sucesso!</div>
-    {% endif%}
+    {% endif %}
 
-    {% if lista|count > 0 %}
+    {% if lista %}
 
     <form class="row g-3">
       <div class="col-auto">
@@ -40,14 +40,13 @@
             <td>{{ l.email }}</td>
             <td><a href="/professores/alterar/{{ l.id }}" class="btn btn-warning">Alterar</a></td>
             <td>
-                <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#modalDeletarProfessor" onclick="setProfessor(id)">
-                    Deletar
-                </button>
+              <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#modalDeletarProfessor" onclick="setProfessor({{ l.id }})">
+                Deletar
+              </button>
             </td>
         </tr>
         {% endfor %}
     </table>
-    {% endif %}
 
     <nav aria-label="...">
       <ul class="pagination pagination-sm">
@@ -62,24 +61,29 @@
         {% endfor %}
       </ul>
     </nav>
-    
-    <div class="modal fade" id="modalDeletarProfessor" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+
+    {% else %}
+    <div class="alert alert-danger">Nenhum professor cadastrado!</div>
+    {% endif %}
+
+    <!-- Modal -->
+    <div class="modal fade" id="modalDeletarProfessor" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
       <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
           <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLabel">Confirmação de exclusão</h5>
+            <h5 class="modal-title" id="staticBackdropLabel">Confirmação de exclusão</h5>
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
           </div>
-          <div class="modal-body">
-            ...
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
-            <button type="button" class="btn btn-primary" onclick="deletarProfessor()">Deletar</button>
-          </div>
+        <div class="modal-body">
+          Confirma a exclusão deste professor?
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+          <button type="button" class="btn btn-danger" onclick="deletarProfessor()">Deletar</button>
         </div>
       </div>
     </div>
+  </div>
 
     <script>
       let professorId = 0

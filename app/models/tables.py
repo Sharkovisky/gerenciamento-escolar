@@ -1,4 +1,5 @@
 from app import db
+from flask_login import UserMixin
 
 class Professor(db.Model):
     __tablename__ = 'professores'
@@ -7,6 +8,21 @@ class Professor(db.Model):
     nome = db.Column(db.String(200), nullable=False)
     email = db.Column(db.String(200), index=True, unique=True, nullable=False)
     senha = db.Column(db.String(200), nullable=False)
+
+    def is_authenticated(self):
+        return True
+
+    def is_active(self):
+        return True
+
+    def is_anonymous(self):
+        return False
+
+    def get_id(self):
+        return self.id
+    
+    def get_nome(self):
+        return self.nome
 
     def __repr__(self):
         return '<Professor %s>' % self.nome
