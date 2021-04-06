@@ -13,6 +13,8 @@ bcrypt = "*"
 sqlalchemy = "*"
 python-dotenv = "*"
 flask-login = "*"
+pytest = "*"
+pytest-flask = "*"
 
 [dev-packages]
 
