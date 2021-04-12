@@ -1,9 +1,13 @@
 {% extends "base.html" %}
 
 {% block conteudo %}
-    <h2 class="bg warning">Listagem de disciplinas</h2>
+<h2 class="bg warning">Listagem de disciplinas</h2>
 
-    {% if lista %}
+{% if msg == 'deletar' %}
+<div class="alert alert-success">Disciplina deletada com sucesso!</div>
+{% endif %}
+
+{% if lista %}
 
     <!-- <form class="row g-3"></form>
         <div class="col-auto">
@@ -11,26 +15,61 @@
             <input text="text" readonly class="form-control-plaintext" id="nome" value="Nome">
         </div> -->
 
-    <table class="table">
-        <tr>
-            <th>ID</th>
-            <th>Nome</th>
-            <th>Tipo de cálculo</th>
-            <th></th>
-        </tr>
-        {% for l in lista %}
-        <tr>
-            <td>{{ l.id }}</td>
-            <td>{{ l.nome }}</td>
-            <td>{{ l.calculo }}</td>
-            <td>Alterar</td>
-            <td>Deletar</td>
-        </tr>
-        {% endfor %}
+<table class="table">
+    <tr>
+        <th>ID</th>
+        <th>Nome</th>
+        <th>Tipo de cálculo</th>
+        <th></th>
+    </tr>
+    {% for l in lista %}
+    <tr>
+        <td>{{ l.id }}</td>
+        <td>{{ l.nome }}</td>
+        <td>{{ l.calculo }}</td>
+        <td><a href="/disciplinas/alterar/{{ l.id }}" class="btn btn-warning">Alterar</a></td>
+        <td>
+            <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#modalDeletarDisciplina" onclick="setDisciplina({{ l.id }})">
+            Deletar
+            </button>
+        </td>
+    </tr>
+    {% endfor %}
+</table>
 
-        {% else %}
-        <div class="alert alert-danger">Nenhuma disciplina cadastrada!</div>
-        {% endif %}
-    </table>
+    {% else %}
+    <div class="alert alert-danger">Nenhuma disciplina cadastrada!</div>
+    {% endif %}
 
-    {% endblock %}
+    <div class="modal fade" id="modalDeletarDisciplina" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="staticBackdropLabel">Confirmação de exclusão</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    Confirma a exclusão desta disciplina?
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                    <button type="button" class="btn btn-danger" onclick="deletarDisciplina()">Deletar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let disciplinaId = 0
+      
+        function setDisciplina(id){
+            disciplinaId = id
+        }
+      
+        function deletarDisciplina(){
+            let url = "/disciplinas/deletar/" + disciplinaId
+            window.location.href = url
+        }
+    </script>
+
+{% endblock %}
