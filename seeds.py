@@ -22,8 +22,16 @@ import bcrypt
 # db.session.add(a1)
 # db.session.commit()
 
-senha_plana = 'Suporte99' 
-senha_encriptada = bcrypt.hashpw(senha_plana.encode('utf-8'), bcrypt.gensalt())
-p1 = Professor(nome='Roberto Guimaraes', email='roberto.guimaraes@ifro.edu.br', senha=senha_encriptada)
-db.session.add(p1)
+# senha_plana = 'Suporte99' 
+# senha_encriptada = bcrypt.hashpw(senha_plana.encode('utf-8'), bcrypt.gensalt())
+# p1 = Professor(nome='Roberto Guimaraes', email='roberto.guimaraes@ifro.edu.br', senha=senha_encriptada)
+# db.session.add(p1)
+# db.session.commit()
+
+d1 = Disciplina(nome='Banco de Dados I', calculo='Soma')
+d2 = Disciplina(nome='Banco de Dados II', calculo='Soma')
+d3 = Disciplina(nome='Estrutura de Dados', calculo='Soma')
+db.session.add(d1)
+db.session.add(d2)
+db.session.add(d3)
 db.session.commit()
