@@ -8,19 +8,19 @@
 {% endif %}
 
 {% if tipo=='alterar' %}
-<form action="/disciplinas/alterar/{{ disciplinas.id }}" method="POST">
+<form action="/disciplinas/alterar/{{ disciplina.id }}" method="POST">
 {% else %}
 <form action="/disciplinas/inserir" method="POST">
 {% endif %}
 
-<div class="form-group">
-    <label for="nome">Nome:</label>
-    <input type="text" id="nome" name="nome" class="form-control" value="{{ disciplina.nome if disciplina }}">
-</div>
-<div class="form-group">
-    <label for="calculo">Tipo de Cálculo:</label>
-    <input type="text" id="calculo" name="calculo" class="form-control" value="{{ disciplina.nome if disciplina }}">
-</div>
-<input type="submit" class="btn btn-primary mt-2" value="{{'Cadastrar' if tipo == 'inserir' else 'Alterar'}}">
+    <div class="form-group">
+        <label for="nome">Nome:</label>
+        <input type="text" id="nome" name="nome" class="form-control" value="{{ disciplina.nome if disciplina }}">
+    </div>
+    <div class="form-group">
+        <label for="calculo">Tipo de Cálculo:</label>
+        <input type="text" id="calculo" name="calculo" class="form-control" value="{{ disciplina.nome if disciplina }}">
+    </div>
+    <input type="submit" class="btn btn-primary mt-2" value="{{'Cadastrar' if tipo == 'inserir' else 'Alterar'}}">
 </form>
 {% endblock %}

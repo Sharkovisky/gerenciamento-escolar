@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+{% block conteudo %}
+<h2 cass="bg warning">Listagem de alunos</h2>
+
+{% if lista %}
+
+<table class="table">
+    <tr>
+        <th>ID</th>
+        <th>Nome</th>
+        <th>E-mail</th>
+        <th></th>
+    </tr>
+</table>
+{% endblock %}

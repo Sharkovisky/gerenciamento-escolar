@@ -34,6 +34,18 @@ class Disciplina(db.Model):
     nome = db.Column(db.String(200), nullable=False)
     calculo = db.Column(db.String(20), nullable=False, default="Soma")
 
+    def is_active(self):
+        return True
+
+    def is_anonymous(self):
+        return False
+
+    def get_id(self):
+        return self.id
+    
+    def get_nome(self):
+        return self.nome
+
     def __repr__(self):
         return '<Disciplina %s>' % self.nome
 

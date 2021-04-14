@@ -37,6 +37,24 @@
     {% endfor %}
 </table>
 
+<nav aria-label="...">
+    <ul class="pagination pagination-sm">
+        {{ total_paginas }}
+        {{ pagina_atual }}
+      {% for p in range(pagina_atual-1, total_paginas-4)%}
+      {% if p==0 %}
+      {% endif %}
+      {% if p == pagina_atual %}
+      <li class="page-item active" aria-current="page"></li>
+      {% else %}
+      <li class="page-item">
+      {% endif %}
+        <a class="page-link" href="/disciplinas/pagina/{{ p }}">{{ p }}</a>
+      </li>
+      {% endfor %}
+    </ul>
+  </nav>
+
     {% else %}
     <div class="alert alert-danger">Nenhuma disciplina cadastrada!</div>
     {% endif %}

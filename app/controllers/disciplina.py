@@ -3,16 +3,20 @@ from flask import render_template, redirect, url_for, request
 from app.models.tables import Disciplina
 
 @app.route('/disciplinas')
-def listar_disciplinas():
+@app.route('/disciplinas/pagina/<int:pagina>')
+def listar_disciplinas(pagina=1):
     mensagem = request.args.get('msg')
     nome = request.args.get('nome')
     if nome:
         nome = '%'+ nome + '%'
         lista = Disciplina.query.filter(Disciplina.nome.like(nome)).all()
     else:
-        lista = Disciplina.query.all()
+        #lista = Disciplina.query.all()
+        paginacao = Disciplina.query.paginate(page=pagina, per_page=5)
+        lista = paginacao.items
+        total_paginas = paginacao.total
 
-    return render_template("disciplina_listar.html", lista=lista)
+    return render_template("disciplina_listar.html", lista=lista, total_paginas=total_paginas, pagina_atual=pagina)
 
 @app.route('/disciplinas/deletar/<disciplina_id>')
 def deletar_disciplina(disciplina_id):
