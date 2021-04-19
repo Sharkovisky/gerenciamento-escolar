@@ -28,6 +28,7 @@ def deletar_professor(professor_id):
     professor = Professor.query.filter_by(id=professor_id).first()
     db.session.delete(professor)
     db.session.commit()
+    app.logger.info('O usuário Nelson deletou o professor '+professor_id)
     return redirect(url_for('listar_professores', msg='deletar'))
 
 @app.route('/professores/alterar/<professor_id>', methods=['GET', 'POST'])
